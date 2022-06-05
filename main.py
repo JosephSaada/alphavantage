@@ -10,8 +10,6 @@ API_key = 'NNJ0QXGXAFBPOTIF'
 CSV_URL = (
     f"https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=SPY&interval=15min&slice=year1month1&apikey={API_key}")
 
-dict_1 = {}
-
 with requests.Session() as s:
     download = s.get(CSV_URL)
     decoded_content = download.content.decode('utf-8')
@@ -20,11 +18,13 @@ with requests.Session() as s:
     #   print(row)
 
 
+class Data:
+    pass
+
+
 def print_time(result: csv.DictReader) -> None:
-    prev = '2022-06-03'
-    clock = None
-    price = 0
-    for row in result:
+    result_list = list(cr)
+    for row in reversed(result_list):
         time = row["time"].split(" ")
         date = time[0]
         clock = time[1]
